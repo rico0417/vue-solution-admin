@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+defineOptions({
+  name: 'Home'
+})
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div>test</div>
 </template>
+
+<style lang="scss" scoped></style>
