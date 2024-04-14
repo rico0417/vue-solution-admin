@@ -6,6 +6,7 @@ import { setupRouter } from '@/routers'
 import App from './App.vue'
 
 import '@/styles/normalize.scss'
+import '@/styles/common.scss'
 
 const app = createApp(App)
 
