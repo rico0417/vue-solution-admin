@@ -1,3 +1,6 @@
 - [x] 引入element-plus
 - [x] 引入normalize.scss(初始化css包)
 - [x] 开发登录页（初版）
+- [x] 引入pinia及常用模块
+- [ ] 处理axios配置及接口
+- [ ] 完成登录页的基本登录

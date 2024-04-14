@@ -23,10 +23,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref } from 'vue'
+import { useUserStore } from '@/stores/modules/user'
 defineOptions({
   name: 'Login'
 })
+
+const userStore = useUserStore()
 const loginForm = ref({
   username: '',
   password: ''
