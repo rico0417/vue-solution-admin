@@ -23,17 +23,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useUserStore } from '@/stores/modules/user'
+import { ref } from 'vue';
+import { useUserStore } from '@/stores/modules/user';
 defineOptions({
   name: 'Login'
-})
+});
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 const loginForm = ref({
   username: '',
   password: ''
-})
+});
 </script>
 
 <style lang="scss" scoped>

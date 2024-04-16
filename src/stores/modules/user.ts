@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import piniaPersistConfig from '@/stores/plugins/persist'
+import { defineStore } from 'pinia';
+import piniaPersistConfig from '@/stores/plugins/persist';
 
 export const useUserStore = defineStore({
   id: 'solution-user',
@@ -10,11 +10,11 @@ export const useUserStore = defineStore({
   getters: {},
   actions: {
     setToken(token: string) {
-      this.token = token
+      this.token = token;
     },
     setUserInfo(userInfo: any) {
-      this.userInfo = userInfo
+      this.userInfo = userInfo;
     }
   },
   persist: piniaPersistConfig('solution-user')
-})
+});

@@ -1,13 +1,13 @@
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import type { App } from 'vue'
-import { staticRouter, errorRouter } from '@/routers/modules/staticRouter'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
+import type { App } from 'vue';
+import { staticRouter, errorRouter } from '@/routers/modules/staticRouter';
 
-const mode = import.meta.env.VITE_ROUTER_MODE
+const mode = import.meta.env.VITE_ROUTER_MODE;
 
 const routerMode: any = {
   hash: () => createWebHashHistory(),
   history: () => createWebHistory()
-}
+};
 
 /**
  * @description 路由参数配置简介
@@ -30,10 +30,10 @@ const router = createRouter({
   routes: [...staticRouter, ...errorRouter],
   strict: false,
   scrollBehavior: () => ({ left: 0, top: 0 })
-})
+});
 
 function setupRouter(app: App<Element>) {
-  app.use(router)
+  app.use(router);
 }
 
-export { router, setupRouter }
+export { router, setupRouter };
