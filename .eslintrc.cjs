@@ -6,7 +6,7 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 // prettier（即eslint-config-prettier）关闭所有可能干扰Prettier规则的Eslint规则，确保将其放在最后，这样它有机会覆盖其他配置
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
+  parser: 'vue-eslint-parser',
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
@@ -16,13 +16,14 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'prettier'
   ],
-  rule: {
+  rules: {
     'vue/multi-word-component-names': 'off',
     'prettier/prettier': 'error', // 打开prettier插件提供的规则，该插件从 ESLint 内运行 Prettier
     // 关闭这两个 ESLint 核心规则，这两个规则和prettier插件一起使用会出现问题，具体可参阅
     // https://github.com/prettier/eslint-plugin-prettier/blob/master/README.md#arrow-body-style-and-prefer-arrow-callback-issue
     'arrow-body-style': 'off',
-    'prefer-arrow-callback': 'off'
+    'prefer-arrow-callback': 'off',
+    '@typescript-eslint/no-explicit-any': 'off' // 临时关闭typescript中对any的限制
   },
   parserOptions: {
     ecmaVersion: 'latest'
