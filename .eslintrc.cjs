@@ -6,6 +6,11 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 // prettier（即eslint-config-prettier）关闭所有可能干扰Prettier规则的Eslint规则，确保将其放在最后，这样它有机会覆盖其他配置
 module.exports = {
   root: true,
+  env: {
+    browser: true,
+    node: true,
+    es6: true
+  },
   parser: 'vue-eslint-parser',
   extends: [
     'plugin:vue/vue3-essential',
