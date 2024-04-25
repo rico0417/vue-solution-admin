@@ -23,7 +23,7 @@ module.exports = {
   ],
   rules: {
     'vue/multi-word-component-names': 'off',
-    'prettier/prettier': 'error', // 打开prettier插件提供的规则，该插件从 ESLint 内运行 Prettier
+    'prettier/prettier': ['error', { endOfLine: 'auto' }], // 打开prettier插件提供的规则，该插件从 ESLint 内运行 Prettier
     // 关闭这两个 ESLint 核心规则，这两个规则和prettier插件一起使用会出现问题，具体可参阅
     // https://github.com/prettier/eslint-plugin-prettier/blob/master/README.md#arrow-body-style-and-prefer-arrow-callback-issue
     'arrow-body-style': 'off',

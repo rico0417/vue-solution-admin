@@ -3,4 +3,9 @@
 - [x] 开发登录页（初版）
 - [x] 引入pinia及常用模块
 - [x] 处理axios配置及接口
-- [ ] 完成登录页的基本登录
+- [x] 配置eslint、prettier、lint-staged、commitlint、commitizen
+- [x] 完成登录页的基本登录
+- [ ] 配置stylelint
+- [ ] 继续完善router（如登录后跳转页等内容）
+- [ ] 路由守卫逻辑完善（permission.ts）
+- [ ] 只允许pnpm安装包（https://pnpm.io/zh/only-allow-pnpm）
