@@ -7,5 +7,5 @@
 - [x] 完成登录页的基本登录
 - [ ] 配置stylelint
 - [ ] 继续完善router（如登录后跳转页等内容）
-- [ ] 路由守卫逻辑完善（permission.ts）
-- [ ] 只允许pnpm安装包（https://pnpm.io/zh/only-allow-pnpm）
+- [x] 路由守卫逻辑完善（permission.ts）
+- [x] 只允许pnpm安装包（https://pnpm.io/zh/only-allow-pnpm）

@@ -13,7 +13,8 @@
     "format": "prettier --write src/",
     "prepare": "husky install",
     "commit": "git add . && cz && git push",
-    "cz": "git cz"
+    "cz": "git cz",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
