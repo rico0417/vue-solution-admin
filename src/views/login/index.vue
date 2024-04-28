@@ -31,15 +31,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import type { ElForm } from 'element-plus';
 import md5 from 'md5';
 import { ElMessage } from 'element-plus';
 import { loginApi } from '@/api/modules/login';
 import { useUserStore } from '@/stores/modules/user';
+import { HOME_URL } from '@/config';
 defineOptions({
   name: 'Login'
 });
 
+const router = useRouter();
 const userStore = useUserStore();
 
 // 表单对象
@@ -72,6 +75,8 @@ const doLogin = () => {
           password: md5(loginForm.value.password)
         });
         userStore.setToken(data.access_token);
+        // 跳转首页
+        router.push(HOME_URL);
       } catch (error: any) {
         ElMessage.error(error.message);
       } finally {
