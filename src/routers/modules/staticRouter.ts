@@ -22,22 +22,7 @@ export const staticRouter: RouteRecordRaw[] = [
     name: 'layout',
     component: () => import('@/layouts/index.vue'),
     redirect: HOME_URL,
-    children: [
-      {
-        path: '/home/index',
-        name: 'home',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          icon: 'HomeFilled',
-          title: '首页',
-          isLink: '',
-          isHide: false,
-          isFull: false,
-          isAffix: true,
-          isKeepAlive: true
-        }
-      }
-    ]
+    children: []
   }
 ];
 

@@ -16,8 +16,6 @@ const config = {
   withCredentials: true
 };
 
-const userStore = useUserStore();
-
 const axiosCanceler = new AxiosCanceler();
 
 class RequestHttp {
@@ -27,6 +25,7 @@ class RequestHttp {
 
     this.service.interceptors.request.use(
       (config: CustomAxiosRequestConfig) => {
+        const userStore = useUserStore();
         /**
          * 重复请求如果不设置的话，默认取消
          * 如果需要主动控制的话，在api服务中通过指定的第三个参数：{ cancel: false }

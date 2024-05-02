@@ -1,6 +1,8 @@
 import type { Router } from 'vue-router';
 import { useUserStore } from '@/stores/modules/user';
+import { useAuthStore } from '@/stores/modules/auth';
 import { LOGIN_URL, ROUTER_WHITE_LIST } from '@/config';
+import { initDynamicRouter } from '@/routers/modules/dynamicRouter';
 import NProgress from '@/plugins/nprogress';
 
 /**
@@ -9,6 +11,7 @@ import NProgress from '@/plugins/nprogress';
 export function setupPermission(router: Router) {
   router.beforeEach(async (to, from, next) => {
     const userStore = useUserStore();
+    const authStore = useAuthStore();
 
     // 1.NProgress 开始
     NProgress.start();
@@ -30,7 +33,13 @@ export function setupPermission(router: Router) {
     // 5.判断是否有 Token，没有重定向到 login 页面
     if (!userStore.token) return next({ path: LOGIN_URL, replace: true });
 
-    // 8.正常访问页面
+    // 6.如果没有菜单列表，就重新请求菜单列表并添加动态路由
+    if (!authStore.authMenuListGet.length) {
+      await initDynamicRouter();
+      return next({ ...to, replace: true });
+    }
+
+    // 7.正常访问页面
     next();
   });
 
