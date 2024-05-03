@@ -9,10 +9,10 @@
         :rules="loginRules"
         size="large"
       >
-        <el-form-item label="Account" prop="usernasme">
+        <el-form-item label="Account" prop="username">
           <el-input class="login-item" v-model="loginForm.username" placeholder="用户名"></el-input>
         </el-form-item>
-        <el-form-item label="Password" prop="passwsord">
+        <el-form-item label="Password" prop="password">
           <el-input
             class="login-item"
             type="password"
@@ -23,6 +23,7 @@
           ></el-input>
         </el-form-item>
         <el-button type="primary" class="login-item" @click="doLogin" :loading="loading">登录</el-button>
+        <el-button type="success" class="login-item" @click="doReset">重置</el-button>
       </el-form>
     </div>
     <div class="login-tip"></div>
@@ -30,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import type { ElForm } from 'element-plus';
 import md5 from 'md5';
@@ -85,6 +86,24 @@ const doLogin = () => {
     }
   });
 };
+
+// 重置
+const doReset = () => {
+  if (!loginFormRef.value) return;
+  loginFormRef.value.resetFields();
+};
+
+// 监听回车键
+onMounted(() => {
+  // 监听 enter 事件（调用登录）
+  document.onkeydown = (e: KeyboardEvent) => {
+    e = (window.event as KeyboardEvent) || e;
+    if (e.code === 'Enter' || e.code === 'enter' || e.code === 'NumpadEnter') {
+      if (loading.value) return;
+      doLogin();
+    }
+  };
+});
 </script>
 
 <style lang="scss" scoped>

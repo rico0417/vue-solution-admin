@@ -3,6 +3,7 @@ import { setupElementPlus } from '@/plugins/elementPlus';
 import { router, setupRouter } from '@/routers';
 import { setupStore } from '@/stores';
 import { setupPermission } from '@/permission';
+import { setupI18n } from '@/plugins/languages';
 
 import '@/styles/normalize.scss';
 import '@/styles/common.scss';
@@ -19,5 +20,7 @@ setupElementPlus(app);
 setupRouter(app);
 // 路由权限控制
 setupPermission(router);
+// i18n
+setupI18n(app);
 
 app.mount('#app');

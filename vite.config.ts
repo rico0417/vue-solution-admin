@@ -13,7 +13,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     plugins: [vue(), vueJsx()],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
       }
     },
     // 开发服务器选项

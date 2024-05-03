@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import { useGlobalStore } from '@/stores/modules/global';
 import { useTheme } from '@/hooks/useTheme';
 import { reactive, computed, onMounted } from 'vue';
@@ -19,8 +20,10 @@ const { initTheme } = useTheme();
 initTheme();
 
 // 初始化语言
+const i18n = useI18n();
 onMounted(() => {
   const language = globalStore.language ?? getBrowserLang();
+  i18n.locale.value = language;
   globalStore.setGlobalState('language', language);
 });
 
