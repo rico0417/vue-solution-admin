@@ -6,6 +6,8 @@
 - [x] 配置eslint、prettier、lint-staged、commitlint、commitizen
 - [x] 完成登录页的基本登录
 - [ ] 配置stylelint
-- [ ] 继续完善router（如登录后跳转页等内容）
+- [x] 继续完善router（如登录后跳转页等内容）
+- [x] 增加主题颜色配置
+- [ ] 完善布局配置
 - [x] 路由守卫逻辑完善（permission.ts）
 - [x] 只允许pnpm安装包（https://pnpm.io/zh/only-allow-pnpm）
