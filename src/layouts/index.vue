@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent, type Component } from 'vue';
+import { computed, defineAsyncComponent, type Component, watch } from 'vue';
 import { useGlobalStore } from '@/stores/modules/global';
 import Loading from '@/components/Loading/index.vue';
 
@@ -24,6 +24,16 @@ const layout = computed(() => globalStore.layout);
 const LayoutComponents: Record<any, Component> = {
   vertical: defineAsyncComponent(() => import('./template/LayoutVertical/index.vue'))
 };
+
+// 监听布局变化，在 body 上添加相对应的 class值（纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns）
+watch(
+  () => layout.value,
+  () => {
+    const body = document.body as HTMLElement;
+    body.setAttribute('class', layout.value);
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="scss" scoped>
