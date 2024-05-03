@@ -2,15 +2,14 @@ import { defineConfig, loadEnv, ConfigEnv, UserConfig } from 'vite';
 import { wrapperEnv } from './build/getEnv';
 import { createProxy } from './build/proxy';
 import { fileURLToPath, URL } from 'node:url';
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
+import { createVitePlugins } from './build/plugins';
 
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
   return {
-    plugins: [vue(), vueJsx()],
+    plugins: createVitePlugins(viteEnv),
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),

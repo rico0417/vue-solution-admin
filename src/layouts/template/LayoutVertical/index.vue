@@ -20,7 +20,10 @@
       </div>
     </el-aside>
     <el-container>
-      <el-header>header</el-header>
+      <el-header>
+        <HeaderLeft />
+        <HeaderRight />
+      </el-header>
       <Main />
     </el-container>
   </el-container>
@@ -33,6 +36,9 @@ import { useAuthStore } from '@/stores/modules/auth';
 import { useGlobalStore } from '@/stores/modules/global';
 import Main from '@/layouts/components/Main/index.vue';
 import SubMenu from '@/layouts/components/Menu/SubMenu.vue';
+import HeaderLeft from '@/layouts/components/Header/HeaderLeft.vue';
+import HeaderRight from '@/layouts/components/Header/HeaderRight.vue';
+
 defineOptions({
   name: 'LayoutVertical'
 });
