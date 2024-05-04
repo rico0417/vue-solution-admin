@@ -13,7 +13,7 @@ import { useGlobalStore } from '@/stores/modules/global';
 const globalStore = useGlobalStore();
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .HeaderLeft-container {
   display: flex;
   align-items: center;

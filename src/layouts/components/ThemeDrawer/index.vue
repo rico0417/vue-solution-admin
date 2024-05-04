@@ -187,7 +187,7 @@ const setLayout = (val: any) => {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .divider {
   margin-top: 15px;
   .el-icon {

@@ -100,7 +100,7 @@ const changeSubMenu = (item: any) => {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .el-container {
   width: 100%;
   height: 100%;

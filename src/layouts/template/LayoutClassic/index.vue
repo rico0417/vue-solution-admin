@@ -59,7 +59,7 @@ const menuList = computed(() => authStore.showMenuListGet);
 const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path) as string);
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .el-container {
   width: 100%;
   height: 100%;

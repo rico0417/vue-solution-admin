@@ -49,7 +49,7 @@ const onBreadcrumbClick = (item: any, index: number) => {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .breadcrumb-box {
   display: flex;
   align-items: center;

@@ -11,4 +11,5 @@
 - [x] 完善布局配置
 - [x] 路由守卫逻辑完善（permission.ts）
 - [x] 只允许pnpm安装包（https://pnpm.io/zh/only-allow-pnpm）
-- [ ] 面包屑
+- [x] 面包屑
+- [ ] 完善vite配置

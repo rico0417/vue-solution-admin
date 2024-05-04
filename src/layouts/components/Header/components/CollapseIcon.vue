@@ -13,7 +13,7 @@ const globalStore = useGlobalStore();
 const changeCollapse = () => globalStore.setGlobalState('isCollapse', !globalStore.isCollapse);
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .collapse-icon {
   margin-right: 20px;
   font-size: 22px;

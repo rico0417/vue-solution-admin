@@ -8,7 +8,7 @@
 defineOptions({ name: 'Loading' });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .loading-box {
   display: flex;
   flex-direction: column;
