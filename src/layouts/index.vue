@@ -7,12 +7,14 @@
       <Loading />
     </template>
   </suspense>
+  <ThemeDrawer />
 </template>
 
 <script setup lang="ts">
 import { computed, defineAsyncComponent, type Component, watch } from 'vue';
 import { useGlobalStore } from '@/stores/modules/global';
 import Loading from '@/components/Loading/index.vue';
+import ThemeDrawer from './components/ThemeDrawer/index.vue';
 
 defineOptions({
   name: 'Layout'
@@ -22,7 +24,10 @@ const globalStore = useGlobalStore();
 const layout = computed(() => globalStore.layout);
 
 const LayoutComponents: Record<any, Component> = {
-  vertical: defineAsyncComponent(() => import('./template/LayoutVertical/index.vue'))
+  vertical: defineAsyncComponent(() => import('./template/LayoutVertical/index.vue')),
+  classic: defineAsyncComponent(() => import('./template/LayoutClassic/index.vue')),
+  transverse: defineAsyncComponent(() => import('./template/LayoutTransverse/index.vue')),
+  columns: defineAsyncComponent(() => import('./template/LayoutColumns/index.vue'))
 };
 
 // 监听布局变化，在 body 上添加相对应的 class值（纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns）
