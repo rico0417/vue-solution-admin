@@ -9,6 +9,13 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
   return {
+    // 开发或生产环境服务的公共基础路径
+    base: viteEnv.VITE_PUBLIC_PATH,
+    /**
+     * 项目根目录（index.html 文件所在的位置）。可以是一个绝对路径，或者一个相对于该配置文件本身的相对路径。
+     * 默认： process.cwd()
+     */
+    root,
     plugins: createVitePlugins(viteEnv),
     resolve: {
       alias: {
@@ -25,6 +32,28 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       cors: true,
       // Load proxy configuration from .env.development
       proxy: createProxy(viteEnv.VITE_PROXY)
+    },
+    esbuild: {
+      pure: viteEnv.VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : []
+    },
+    build: {
+      outDir: 'dist',
+      // 使用esbuild最小化混淆代码
+      minify: 'esbuild',
+      sourcemap: false,
+      // 禁用 gzip 压缩大小报告，可略微减少打包时间
+      reportCompressedSize: false,
+      // 规定触发警告的 chunk 大小
+      chunkSizeWarningLimit: 2000,
+      // 自定义底层的 Rollup 打包配置
+      rollupOptions: {
+        output: {
+          // Static resource classification and packaging
+          chunkFileNames: 'assets/js/[name]-[hash].js',
+          entryFileNames: 'assets/js/[name]-[hash].js',
+          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
+        }
+      }
     }
   };
 });
