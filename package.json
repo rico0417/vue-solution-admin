@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
     "element-plus": "^2.7.0",
     "md5": "^2.3.0",
@@ -26,6 +27,7 @@
     "pinia-plugin-persistedstate": "^3.2.1",
     "qs": "^6.12.1",
     "screenfull": "^6.0.2",
+    "sortablejs": "^1.15.2",
     "vue": "^3.4.21",
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.3.0"
@@ -39,6 +41,7 @@
     "@types/node": "^20.12.5",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.9.14",
+    "@types/sortablejs": "^1.15.8",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
     "@vitejs/plugin-vue": "^5.0.4",

@@ -38,13 +38,19 @@ import md5 from 'md5';
 import { ElMessage } from 'element-plus';
 import { loginApi } from '@/api/modules/login';
 import { useUserStore } from '@/stores/modules/user';
+import { useTabsStore } from '@/stores/modules/tabs';
+import { useKeepAliveStore } from '@/stores/modules/keepAlive';
+import { initDynamicRouter } from '@/routers/modules/dynamicRouter';
 import { HOME_URL } from '@/config';
+
 defineOptions({
   name: 'Login'
 });
 
 const router = useRouter();
 const userStore = useUserStore();
+const tabsStore = useTabsStore();
+const keepAliveStore = useKeepAliveStore();
 
 // 表单对象
 type FormInstance = InstanceType<typeof ElForm>;
@@ -76,6 +82,12 @@ const doLogin = () => {
           password: md5(loginForm.value.password)
         });
         userStore.setToken(data.access_token);
+        // 2.添加动态路由
+        await initDynamicRouter();
+
+        // 3.清空 tabs、keepAlive 数据
+        tabsStore.setTabs([]);
+        keepAliveStore.setKeepAliveName([]);
         // 跳转首页
         router.push(HOME_URL);
       } catch (error: any) {

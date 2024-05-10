@@ -12,4 +12,8 @@
 - [x] 路由守卫逻辑完善（permission.ts）
 - [x] 只允许pnpm安装包（https://pnpm.io/zh/only-allow-pnpm）
 - [x] 面包屑
-- [ ] 完善vite配置
+- [x] 完善vite配置
+- [x] Tabs组件
+- [x] Main组件
+- [x] Maximize组件
+- [ ] 给Tabs组件增加右键功能
