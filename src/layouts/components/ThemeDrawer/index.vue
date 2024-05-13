@@ -110,7 +110,7 @@
     </el-divider>
     <div class="theme-item">
       <span>水印</span>
-      <el-switch v-model="isWaterMark" />
+      <el-switch v-model="isWaterMark" @change="changeWaterMark" />
     </div>
     <div class="theme-item">
       <span>菜单折叠</span>
@@ -149,8 +149,10 @@ import { useTheme } from '@/hooks/useTheme';
 import { useGlobalStore } from '@/stores/modules/global';
 import { DEFAULT_PRIMARY } from '@/config';
 import SwitchDark from '@/components/SwitchDark/index.vue';
+import { useWatermark } from '@/hooks/useWatermark';
 
 const { changePrimary, changeGreyOrWeak, setAsideTheme, setHeaderTheme } = useTheme();
+const { setWatermark, clearAll } = useWatermark();
 
 const globalStore = useGlobalStore();
 const {
@@ -189,6 +191,14 @@ const colorList = [
 const setLayout = (val: any) => {
   globalStore.setGlobalState('layout', val);
   setAsideTheme();
+};
+
+const changeWaterMark = () => {
+  if (isWaterMark.value) {
+    setWatermark('welcome');
+  } else {
+    clearAll();
+  }
 };
 </script>
 
