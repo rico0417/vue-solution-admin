@@ -26,6 +26,8 @@ export const useGlobalStore = defineStore({
     asideInverted: false,
     // 头部反转
     headerInverted: false,
+    // 水印展示
+    isWaterMark: false,
     // 折叠菜单
     isCollapse: false,
     // 菜单手风琴

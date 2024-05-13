@@ -3,7 +3,7 @@
  * @returns {String}
  */
 export function getBrowserLang() {
-  const browserLang = navigator.language ? navigator.language : (<any>navigator).browserLanguage;
+  const browserLang = navigator.language ? navigator.language : navigator.browserLanguage;
   let defaultBrowserLang = '';
   if (['cn', 'zh', 'zh-cn'].includes(browserLang.toLowerCase())) {
     defaultBrowserLang = 'zh';

@@ -109,6 +109,10 @@
       界面设置
     </el-divider>
     <div class="theme-item">
+      <span>水印</span>
+      <el-switch v-model="isWaterMark" />
+    </div>
+    <div class="theme-item">
       <span>菜单折叠</span>
       <el-switch v-model="isCollapse" />
     </div>
@@ -157,6 +161,7 @@ const {
   asideInverted,
   headerInverted,
   isCollapse,
+  isWaterMark,
   accordion,
   breadcrumb,
   breadcrumbIcon,

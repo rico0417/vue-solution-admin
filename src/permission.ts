@@ -47,7 +47,13 @@ export function setupPermission(router: Router) {
    * @description 重置路由
    * */
   const resetRouter = () => {
-    console.log('重置路由');
+    const authStore = useAuthStore();
+    authStore.flatMenuListGet.forEach((route) => {
+      const { name } = route;
+      if (name && router.hasRoute(name)) {
+        router.removeRoute(name);
+      }
+    });
   };
 
   /**
