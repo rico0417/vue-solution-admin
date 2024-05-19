@@ -7,6 +7,7 @@ import { setupI18n } from '@/plugins/languages';
 import { registerGlobComp } from '@/components/registerGlobComp';
 import { setupErrorHandler } from '@/plugins/errorHandler';
 import { setupDirectives } from '@/directives/index';
+import 'virtual:uno.css';
 
 import '@/styles/normalize.scss';
 import '@/styles/common.scss';

@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { PluginOption } from 'vite';
+import UnoCSS from 'unocss/vite';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -30,6 +31,7 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
         data: { title: VITE_GLOB_APP_TITLE }
       }
     }),
+    UnoCSS(),
     // esLint 报错信息显示在浏览器界面上
     eslintPlugin(),
     // 创建打包压缩配置
