@@ -35,7 +35,7 @@ export const errorRouter = [
     name: '403',
     component: () => import('@/views/ErrorMessage/403.vue'),
     meta: {
-      title: '403页面'
+      title: '403错误'
     }
   },
   {
@@ -43,7 +43,7 @@ export const errorRouter = [
     name: '404',
     component: () => import('@/views/ErrorMessage/404.vue'),
     meta: {
-      title: '404页面'
+      title: '404错误'
     }
   },
   {
@@ -51,7 +51,7 @@ export const errorRouter = [
     name: '500',
     component: () => import('@/views/ErrorMessage/500.vue'),
     meta: {
-      title: '500页面'
+      title: '500错误'
     }
   },
   // Resolve refresh page, route warnings
