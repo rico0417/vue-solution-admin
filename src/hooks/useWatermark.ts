@@ -31,6 +31,9 @@ type waterMarkOptionsType = {
   rotate?: number;
 };
 
+/**
+ * sourceMap缓存水印使用记录
+ */
 const sourceMap = new Map<symbol, Omit<UseWatermarkRes, 'clearAll'>>();
 
 function findTargetNode(el) {
@@ -109,9 +112,11 @@ export function useWatermark(
   appendEl: Ref<HTMLElement | null> = ref(document.body) as Ref<HTMLElement>,
   waterMarkOptions: waterMarkOptionsType = {}
 ): UseWatermarkRes {
+  // 利用Symbol()可以创建一个唯一值的特性结合闭包缓存该Symbol变量
   const domSymbol = Symbol(watermarkSymbol);
   const appendElRaw = unref(appendEl);
   if (appendElRaw && sourceMap.has(domSymbol)) {
+    // 判断是否有缓存过该水印，有缓存的话直接从Map对象里返回（避免重复创建）
     const { setWatermark, clear } = sourceMap.get(domSymbol) as UseWatermarkRes;
     return { setWatermark, clear, clearAll };
   }
