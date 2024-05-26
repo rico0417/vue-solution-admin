@@ -1,11 +1,18 @@
 <template>
-  <div>commonModal</div>
+  <div>
+    <el-button @click="myDialog({ title: '父组件弹窗' })">打开弹窗</el-button>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { useModal } from '@/hooks/useModal';
+import MyDialog from './components/MyDialog.vue';
+
 defineOptions({
-  name: 'Home'
+  name: 'CommonModal'
 });
+
+const myDialog = useModal(MyDialog);
 </script>
 
 <style lang="scss" scoped></style>
