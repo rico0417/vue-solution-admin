@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button @click="myDialog({ title: '父组件弹窗' })">打开弹窗</el-button>
+    <el-button @click="myDialog({ title: '父组件弹窗', draggable: true })">打开弹窗(可拖拽)</el-button>
   </div>
 </template>
 

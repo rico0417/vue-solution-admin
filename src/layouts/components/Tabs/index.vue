@@ -10,14 +10,16 @@
           :closable="item.close"
         >
           <template #label>
-            <el-icon v-if="item.icon && tabsIcon" class="tabs-icon">
-              <component :is="item.icon"></component>
-            </el-icon>
-            {{ item.title }}
+            <div class="w-full h-full flex items-center" @contextmenu="onContextMenu($event, item)">
+              <el-icon v-if="item.icon && tabsIcon" class="tabs-icon">
+                <component :is="item.icon"></component>
+              </el-icon>
+              {{ item.title }}
+            </div>
           </template>
         </el-tab-pane>
       </el-tabs>
-      <MoreButton />
+      <TabContextMenu v-model:show="show" :options="options" :is-right-click-tab="isRightClickTab"></TabContextMenu>
     </div>
   </div>
 </template>
@@ -30,7 +32,7 @@ import { useGlobalStore } from '@/stores/modules/global';
 import { useTabsStore } from '@/stores/modules/tabs';
 import { useAuthStore } from '@/stores/modules/auth';
 import { TabsPaneContext, TabPaneName } from 'element-plus';
-import MoreButton from './components/MoreButton.vue';
+import TabContextMenu from './components/TabContextMenu.vue';
 
 defineOptions({ name: 'TabsIndex' });
 
@@ -48,6 +50,25 @@ onMounted(() => {
   tabsDrop();
   initTabs();
 });
+
+const show = ref(false);
+const options = ref({
+  x: 0,
+  y: 0,
+  theme: ''
+});
+
+const isRightClickTab = ref(false);
+const onContextMenu = (e: MouseEvent, item) => {
+  e.preventDefault();
+  isRightClickTab.value = route.path === item.path;
+  //Set the mouse position
+  options.value.x = e.x;
+  options.value.y = e.y;
+  options.value.theme = `${globalStore.rightClickTheme} ${globalStore.isDark ? 'dark' : ''}`;
+  //Show menu
+  show.value = true;
+};
 
 // 监听路由的变化（防止浏览器后退/前进不变化 tabsMenuValue）
 watch(

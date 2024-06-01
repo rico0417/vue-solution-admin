@@ -10,6 +10,14 @@ export const useGlobalStore = defineStore({
     layout: 'vertical',
     // element 组件大小
     assemblySize: 'default',
+    /**
+     * 右键弹窗风格：https://docs.imengyu.top/vue3-context-menu-docs/guide/theme.html
+     * default（默认）
+     * flat（精简）
+     * win10（win10）
+     * mac（mac）
+     */
+    rightClickTheme: 'default',
     // 当前系统语言
     language: null,
     // 当前页面是否全屏

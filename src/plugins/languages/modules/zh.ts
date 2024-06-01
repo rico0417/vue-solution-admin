@@ -5,7 +5,7 @@ export default {
   tabs: {
     refresh: '刷新',
     maximize: '最大化',
-    closeCurrent: '关闭当前',
+    closeCurrent: '关闭选中',
     closeLeft: '关闭左侧',
     closeRight: '关闭右侧',
     closeOther: '关闭其它',

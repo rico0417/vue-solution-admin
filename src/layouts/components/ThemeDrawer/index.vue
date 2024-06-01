@@ -140,6 +140,22 @@
       <span>页脚</span>
       <el-switch v-model="footer" />
     </div>
+    <div class="theme-item">
+      <span>右键弹窗风格</span>
+      <el-dropdown trigger="click">
+        <span class="right-click-theme-side-style"> {{ rightClickTheme }} </span>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item
+              v-for="item of rightClickTypeList"
+              :key="item.label"
+              @click="rightClickTypeChange(item.label)"
+              >{{ item.label }}</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
   </el-drawer>
 </template>
 
@@ -150,6 +166,10 @@ import { useGlobalStore } from '@/stores/modules/global';
 import { DEFAULT_PRIMARY } from '@/config';
 import SwitchDark from '@/components/SwitchDark/index.vue';
 import { useWatermark } from '@/hooks/useWatermark';
+
+defineOptions({
+  name: 'ThemeDrawer'
+});
 
 const { changePrimary, changeGreyOrWeak, setAsideTheme, setHeaderTheme } = useTheme();
 const { setWatermark, clearAll } = useWatermark();
@@ -170,7 +190,8 @@ const {
   tabs,
   tabsIcon,
   footer,
-  themeSettings
+  themeSettings,
+  rightClickTheme
 } = storeToRefs(globalStore);
 
 // 预定义主题颜色
@@ -200,6 +221,29 @@ const changeWaterMark = () => {
     clearAll();
   }
 };
+
+const rightClickTypeList = [
+  {
+    value: 'default',
+    label: 'default'
+  },
+  {
+    value: 'flat',
+    label: 'flat'
+  },
+  {
+    value: 'win10',
+    label: 'win10'
+  },
+  {
+    value: 'mac',
+    label: 'mac'
+  }
+];
+
+const rightClickTypeChange = (type: string) => {
+  globalStore.setGlobalState('rightClickTheme', type);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -228,6 +272,16 @@ const changeWaterMark = () => {
       color: var(--el-text-color-regular);
       cursor: pointer;
     }
+  }
+  .right-click-theme-side-style {
+    width: 80px;
+    padding: 5px 0;
+    border: 1px solid var(--el-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 .layout-box {

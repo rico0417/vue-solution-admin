@@ -7,6 +7,7 @@ import { setupI18n } from '@/plugins/languages';
 import { registerGlobComp } from '@/components/registerGlobComp';
 import { setupErrorHandler } from '@/plugins/errorHandler';
 import { setupDirectives } from '@/directives/index';
+import { setupContextMenu } from '@/plugins/contextMenu';
 import 'virtual:uno.css';
 
 import '@/styles/normalize.scss';
@@ -32,5 +33,7 @@ setupPermission(router);
 setupI18n(app);
 // 引入自定义指令
 setupDirectives(app);
+// 引入鼠标右键
+setupContextMenu(app);
 
 app.mount('#app');
