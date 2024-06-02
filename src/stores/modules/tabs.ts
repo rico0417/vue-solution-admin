@@ -42,7 +42,7 @@ export const useTabsStore = defineStore({
       this.tabsMenuList = this.tabsMenuList.filter((item) => item.path !== tabPath);
     },
     // Close Tabs On Side
-    async closeTabsOnSide(path: string, type: 'left' | 'right') {
+    async closeTabsOnSide(path: string, type: 'left' | 'right', isCurrent = false) {
       const currentIndex = this.tabsMenuList.findIndex((item) => item.path === path);
       if (currentIndex !== -1) {
         const range = type === 'left' ? [0, currentIndex] : [currentIndex + 1, this.tabsMenuList.length];
@@ -53,9 +53,22 @@ export const useTabsStore = defineStore({
       // set keepalive
       const KeepAliveList = this.tabsMenuList.filter((item) => item.isKeepAlive);
       keepAliveStore.setKeepAliveName(KeepAliveList.map((item) => item.name));
+      if (!isCurrent) {
+        const currentRoute = router.currentRoute;
+        // 判断当前地址对应的tab是否还存在
+        const isTabExit = this.tabsMenuList.find((item) => item.path === currentRoute.value.fullPath);
+        if (isTabExit == null) {
+          router.push(path);
+        }
+      }
     },
     // Close MultipleTab
-    async closeMultipleTab(tabsMenuValue?: string) {
+    async closeMultipleTab(tabsMenuValue?: string, isCurrent: boolean = false) {
+      const currentRoute = router.currentRoute;
+      // 当前地址对应的tab是否是可删除的（isAffix)
+      if (!isCurrent && tabsMenuValue && !currentRoute.value.meta.isAffix) {
+        router.push(tabsMenuValue);
+      }
       this.tabsMenuList = this.tabsMenuList.filter((item) => {
         return item.path === tabsMenuValue || !item.close;
       });

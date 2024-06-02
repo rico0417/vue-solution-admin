@@ -18,18 +18,18 @@
         <el-icon><Remove /></el-icon>
       </template>
     </context-menu-item>
-    <context-menu-item :label="$t('tabs.closeLeft')" @click="tabStore.closeTabsOnSide(route.fullPath, 'left')">
+    <context-menu-item :label="$t('tabs.closeLeft')" @click="closeLeftSide">
       <template #icon>
         <el-icon><DArrowLeft /></el-icon>
       </template>
     </context-menu-item>
-    <context-menu-item :label="$t('tabs.closeRight')" @click="tabStore.closeTabsOnSide(route.fullPath, 'right')">
+    <context-menu-item :label="$t('tabs.closeRight')" @click="closeRightSide">
       <template #icon>
         <el-icon><DArrowRight /></el-icon>
       </template>
     </context-menu-item>
     <context-menu-separator></context-menu-separator>
-    <context-menu-item :label="$t('tabs.closeOther')" @click="tabStore.closeMultipleTab(route.fullPath)">
+    <context-menu-item :label="$t('tabs.closeOther')" @click="closeOtherWindows">
       <template #icon>
         <el-icon><CircleClose /></el-icon>
       </template>
@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, nextTick } from 'vue';
+import { inject, nextTick, computed, toRefs } from 'vue';
 import { HOME_URL } from '@/config';
 import { useTabsStore } from '@/stores/modules/tabs';
 import { useGlobalStore } from '@/stores/modules/global';
@@ -58,16 +58,25 @@ const show = defineModel('show');
 
 interface TabContextMenuProps {
   options: any;
-  isRightClickTab: boolean;
+  rightClickData: any;
 }
 
-defineProps<TabContextMenuProps>();
+const props = defineProps<TabContextMenuProps>();
+const { options, rightClickData } = toRefs(props);
 
 const route = useRoute();
 const router = useRouter();
 const tabStore = useTabsStore();
 const globalStore = useGlobalStore();
 const keepAliveStore = useKeepAliveStore();
+
+const isRightClickTab = computed(() => {
+  return route.path === rightClickData.value.path;
+});
+
+const rightClickTargetPath = computed(() => {
+  return rightClickData?.value?.path || '';
+});
 
 // 刷新
 const refreshCurrentPage: any = inject('refresh');
@@ -93,16 +102,33 @@ const maximize = () => {
   globalStore.setGlobalState('maximize', true);
 };
 
-// 关闭当前
+// 关闭选择
 const closeCurrentTab = () => {
-  if (route.meta.isAffix) return;
-  tabStore.removeTabs(route.fullPath);
+  if (!rightClickData.value.close) return;
+  const path = rightClickTargetPath.value;
+  tabStore.removeTabs(path, path === route.fullPath);
 };
 
 // 关闭全部
 const closeAllTab = () => {
   tabStore.closeMultipleTab();
   router.push(HOME_URL);
+};
+
+// 关闭左侧
+const closeLeftSide = () => {
+  const path = rightClickTargetPath.value;
+  tabStore.closeTabsOnSide(path, 'left', path === route.fullPath);
+};
+// 关闭右侧
+const closeRightSide = () => {
+  const path = rightClickTargetPath.value;
+  tabStore.closeTabsOnSide(path, 'right', path === route.fullPath);
+};
+// 关闭其它
+const closeOtherWindows = () => {
+  const path = rightClickTargetPath.value;
+  tabStore.closeMultipleTab(path, path === route.fullPath);
 };
 </script>
 

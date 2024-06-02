@@ -19,7 +19,7 @@
           </template>
         </el-tab-pane>
       </el-tabs>
-      <TabContextMenu v-model:show="show" :options="options" :is-right-click-tab="isRightClickTab"></TabContextMenu>
+      <TabContextMenu v-model:show="show" :options="options" :right-click-data="rightClickData"></TabContextMenu>
     </div>
   </div>
 </template>
@@ -58,15 +58,13 @@ const options = ref({
   theme: ''
 });
 
-const isRightClickTab = ref(false);
+const rightClickData = ref(null);
 const onContextMenu = (e: MouseEvent, item) => {
   e.preventDefault();
-  isRightClickTab.value = route.path === item.path;
-  //Set the mouse position
+  rightClickData.value = item;
   options.value.x = e.x;
   options.value.y = e.y;
   options.value.theme = `${globalStore.rightClickTheme} ${globalStore.isDark ? 'dark' : ''}`;
-  //Show menu
   show.value = true;
 };
 
@@ -128,7 +126,7 @@ const tabClick = (tabItem: TabsPaneContext) => {
 
 // Remove Tab
 const tabRemove = (fullPath: TabPaneName) => {
-  tabStore.removeTabs(fullPath as string, fullPath == route.fullPath);
+  tabStore.removeTabs(fullPath as string, fullPath === route.fullPath);
 };
 </script>
 
