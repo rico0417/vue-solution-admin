@@ -1,94 +1,108 @@
 <template>
   <div>
-    <div class="horbox">
-      <el-button @contextmenu="onContextMenu($event)">普通右键</el-button>
-      <el-button>函数式右键</el-button>
-      <el-button>组件式右键</el-button>
-      <el-button>嵌套菜单右键</el-button>
+    <div class="contextMenu-demo">
+      <el-button @contextmenu="contextDemo1">函数式嵌套菜单右键（包含嵌套）</el-button>
+      <el-button @contextmenu="contextDemo2">组件式调用右键菜单（包含嵌套）</el-button>
     </div>
-
     <div>
-      <!--this is component mode of context-menu-->
-      <context-menu v-model:show="show" :options="options">
-        <context-menu-item label="刷新">
-          <template #icon>
-            <el-icon><Refresh /></el-icon>
-          </template>
-        </context-menu-item>
-        <context-menu-item label="最大化">
-          <template #icon>
-            <el-icon><Refresh /></el-icon>
-          </template>
-        </context-menu-item>
-        <context-menu-separator></context-menu-separator>
-        <context-menu-item label="关闭当前">
-          <template #icon>
-            <el-icon><Refresh /></el-icon>
-          </template>
-        </context-menu-item>
-        <context-menu-item label="关闭左侧">
-          <template #icon>
-            <el-icon><Refresh /></el-icon>
-          </template>
-        </context-menu-item>
-        <context-menu-item label="关闭右侧">
-          <template #icon>
-            <el-icon><Refresh /></el-icon>
-          </template>
-        </context-menu-item>
-        <context-menu-separator></context-menu-separator>
-        <context-menu-item label="关闭其它">
-          <template #icon>
-            <el-icon><Refresh /></el-icon>
-          </template>
-        </context-menu-item>
-        <context-menu-item label="关闭所有">
-          <template #icon>
-            <el-icon><Refresh /></el-icon>
-          </template>
-        </context-menu-item>
-      </context-menu>
+      <span>相对来说，函数式嵌套菜单右键方式使用图标没有组件式轻松，如果需要在函数式中使用图标可以参考官方文档</span>
+      <a href="https://docs.imengyu.top/vue3-context-menu-docs/guide/icon.html">链接</a>
+      <span>个人更加推荐组件式调用方式，可DIY性更强些</span>
     </div>
+    <!-- 组件 -->
+    <TabContextMenuDemo1 v-model:show="show" :options="options"></TabContextMenuDemo1>
   </div>
 </template>
 
 <script setup lang="ts">
-// import { defineComponent } from 'vue';
-
-// export default defineComponent({
-//   data() {
-//     return {
-//       show: false,
-//       options: {
-//         x: 500,
-//         y: 200
-//       }
-//     };
-//   },
-//   methods: {
-//     onContextMenu(e: MouseEvent) {
-//       e.preventDefault();
-//       //Set the mouse position
-//       this.options.x = e.x;
-//       this.options.y = e.y;
-//       //Show menu
-//       this.show = true;
-//     }
-//   }
-// });
 import { ref } from 'vue';
+import ContextMenu from '@imengyu/vue3-context-menu';
+import TabContextMenuDemo1 from './components/TabContextMenuDemo1.vue';
 
+/**
+ * 函数式嵌套菜单右键
+ */
+const contextDemo1 = (e: MouseEvent) => {
+  e.preventDefault();
+  ContextMenu.showContextMenu({
+    x: e.x,
+    y: e.y,
+    items: [
+      {
+        label: '菜单1',
+        onClick: () => {
+          alert('You click a menu item');
+        }
+      },
+      {
+        label: '菜单2',
+        onClick: () => {
+          alert('You click a menu item');
+        }
+      },
+      {
+        label: '菜单3',
+        onClick: () => {
+          alert('You click a menu item');
+        },
+        divided: true
+      },
+      {
+        label: '菜单4',
+        onClick: () => {
+          alert('You click a menu item');
+        }
+      },
+      {
+        label: '菜单5',
+        onClick: () => {
+          alert('You click a menu item');
+        }
+      },
+      {
+        label: '菜单6',
+        onClick: () => {
+          alert('You click a menu item');
+        }
+      },
+      {
+        label: '菜单7',
+        onClick: () => {
+          alert('You click a menu item');
+        },
+        divided: true
+      },
+      {
+        label: '更多菜单',
+        children: [
+          { label: '菜单8' },
+          {
+            label: '菜单9',
+            onClick: () => {
+              alert('You click a menu item');
+            }
+          },
+          { label: '菜单10' }
+        ]
+      }
+    ]
+  });
+};
+
+/**
+ * 组件式调用右键菜单
+ */
 const show = ref(false);
 const options = ref({
   x: 0,
-  y: 0
+  y: 0,
+  theme: ''
 });
-const onContextMenu = (e: MouseEvent) => {
+
+const contextDemo2 = (e: MouseEvent) => {
   e.preventDefault();
-  //Set the mouse position
   options.value.x = e.x;
   options.value.y = e.y;
-  //Show menu
   show.value = true;
 };
 </script>
