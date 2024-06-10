@@ -18,7 +18,9 @@
 import { ref } from 'vue';
 import ContextMenu from '@imengyu/vue3-context-menu';
 import TabContextMenuDemo1 from './components/TabContextMenuDemo1.vue';
+import { useGlobalStore } from '@/stores/modules/global';
 
+const globalStore = useGlobalStore();
 /**
  * 函数式嵌套菜单右键
  */
@@ -27,6 +29,7 @@ const contextDemo1 = (e: MouseEvent) => {
   ContextMenu.showContextMenu({
     x: e.x,
     y: e.y,
+    theme: `${globalStore.rightClickTheme} ${globalStore.isDark ? 'dark' : ''}`,
     items: [
       {
         label: '菜单1',
@@ -103,6 +106,7 @@ const contextDemo2 = (e: MouseEvent) => {
   e.preventDefault();
   options.value.x = e.x;
   options.value.y = e.y;
+  options.value.theme = `${globalStore.rightClickTheme} ${globalStore.isDark ? 'dark' : ''}`;
   show.value = true;
 };
 </script>

@@ -1,35 +1,56 @@
 <template>
-  <div class="login-container">
-    <div class="login-tool">
-      <el-form
-        ref="loginFormRef"
-        class="login-form"
-        label-position="top"
-        :model="loginForm"
-        :rules="loginRules"
-        size="large"
-      >
-        <el-form-item label="Account" prop="username">
-          <el-input class="login-item" v-model="loginForm.username" placeholder="用户名"></el-input>
-        </el-form-item>
-        <el-form-item label="Password" prop="password">
-          <el-input
-            class="login-item"
-            type="password"
-            show-password
-            v-model="loginForm.password"
-            placeholder="密码"
-            autocomplete="new-password"
-          ></el-input>
-        </el-form-item>
-        <el-button type="primary" class="login-item" @click="doLogin" :loading="loading">登录</el-button>
-        <el-button type="success" class="login-item" @click="doReset">重置</el-button>
-      </el-form>
+  <div class="w-screen h-screen bg-gray-100 flex justify-center items-center">
+    <div class="w-212 h-125 shadow-2xl bg-white rounded-3xl flex items-center p-5 box-border">
+      <div class="sm:w-1/2 sm:flex h-full bg-blue-700 rounded-2xl hidden items-center box-border flex-col">
+        <div class="mt-1/5">
+          <img src="@/assets/images/login_logo.png" class="w-50 mb-5" />
+          <div class="text-white text-5xl">Welcome</div>
+        </div>
+      </div>
+      <div class="w-full sm:w-1/2 h-full box-border">
+        <div class="pt-10 pr-7.5 pb-5 pl-7.5">
+          <div class="text-4xl">Hello,Again</div>
+          <div class="mt-2.5">We are happy to have you back.</div>
+          <div class="mt-10">
+            <el-form ref="loginFormRef" label-position="top" :model="loginForm" :rules="loginRules" size="large">
+              <el-form-item prop="username">
+                <el-input size="large" placeholder="username" v-model="loginForm.username"></el-input>
+              </el-form-item>
+              <el-form-item prop="password">
+                <el-input
+                  size="large"
+                  placeholder="password"
+                  type="password"
+                  v-model="loginForm.password"
+                  show-password
+                ></el-input>
+              </el-form-item>
+            </el-form>
+          </div>
+          <div class="mt-15 flex flex-col">
+            <el-button
+              type="primary"
+              class="w-full h-11.5 rounded-2"
+              @click="doLogin"
+              :disabled="loading"
+              :loading="loading"
+              >登录</el-button
+            >
+            <el-divider><span class="text-gray">OR</span></el-divider>
+            <el-button
+              class="w-full h-11.5 rounded-2"
+              type="warning"
+              @click="doReset"
+              :disabled="loading"
+              :loading="loading"
+              >重置</el-button
+            >
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="login-tip"></div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
@@ -119,30 +140,12 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.login-container {
-  display: flex;
-  height: 100%;
-  box-sizing: border-box;
-}
-.login-tool {
-  width: 36%;
-  height: 100%;
-  background-color: #f8f8f8;
-  border-right: 1px solid #dfdfdf;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .login-form {
-    width: 400px;
+.el-input {
+  :deep(.el-input__wrapper) {
+    border-radius: 8px;
+    &.is-focus {
+      box-shadow: 0px 0px 0px 2px var(--el-input-focus-border-color) inset;
+    }
   }
-}
-.login-tip {
-  width: 64%;
-  height: 100%;
-  background-color: #fdfdfd;
-}
-.login-item {
-  width: 100%;
-  height: 42px;
 }
 </style>
